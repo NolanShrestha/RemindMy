@@ -50,6 +50,7 @@ class home3 extends StatefulWidget {
 }
 
 class _home3State extends State<home3> {
+  String userStatus = '';
   List<Map<String, dynamic>> tasks = [];
   List<Map<dynamic, dynamic>> notifications = [];
   final storage = FlutterSecureStorage();
@@ -59,7 +60,35 @@ class _home3State extends State<home3> {
   @override
   void initState() {
     super.initState();
+    fetchUserData();
     fetchTasks();
+  }
+
+  Future<void> fetchUserData() async {
+    final token = await storage.read(key: 'jwt');
+
+    if (token == null) {
+      print('No token found');
+      return;
+    }
+
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:3000/auth/me'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      setState(() {
+        userStatus =
+            responseData['status'].toString(); // Convert to string if necessary
+      });
+    } else {
+      print('Failed to fetch user data: ${response.body}');
+    }
   }
 
   Future<void> fetchTasks() async {
@@ -84,7 +113,8 @@ class _home3State extends State<home3> {
         tasks = responseData.cast<Map<String, dynamic>>();
       });
 
-      if (tasks.length > 19) {
+      // Check if userStatus is not "1" and if tasks length is greater than 2
+      if (userStatus != "1" && tasks.length > 2) {
         _showAlertDialog();
       }
     } else {

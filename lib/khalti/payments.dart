@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../screens/home1.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,9 +32,7 @@ class payments extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Center(
-            child: Text('Khalti Payment'),
-          ),
+          title: Text('Khalti Payment Gateway RM'),
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Wallet Payment'),
@@ -244,9 +243,15 @@ class _WalletPaymentState extends State<WalletPayment> {
             child: const Text('OK'),
             onPressed: () async {
               final date = DateTime.now().toIso8601String();
+              setState(() {
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const home1()),
+                );
+              });
               try {
                 await PaymentService().storePayment(date);
-                Navigator.of(context).pop();
               } catch (e) {
                 // Handle the error, show a message, etc.
                 print(e);
@@ -379,7 +384,6 @@ class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
             },
           );
         }
-
         return const Center(child: CircularProgressIndicator());
       },
     );
@@ -394,7 +398,16 @@ class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
         actions: [
           TextButton(
             child: const Text('OK'),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop(); // Dismiss the dialog first
+              // Delay navigation to ensure the dialog has been dismissed
+              Future.delayed(Duration(milliseconds: 300), () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const home1()),
+                );
+              });
+            },
           ),
         ],
       ),
@@ -410,7 +423,13 @@ class _BankingState extends State<Banking> with AutomaticKeepAliveClientMixin {
         actions: [
           TextButton(
             child: const Text('OK'),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop(); // Dismiss the dialog first
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const home1()),
+              );
+            },
           ),
         ],
       ),

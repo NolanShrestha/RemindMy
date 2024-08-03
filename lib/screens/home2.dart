@@ -67,6 +67,7 @@ class _home2State extends State<home2> {
   LatLng? mylatlong;
   String address = 'Unknown';
   String addressx = 'Unknown';
+  String userStatus = '';
   List<Map<dynamic, dynamic>> userTasks = [];
   List<Map<dynamic, dynamic>> notifications = [];
 
@@ -79,11 +80,70 @@ class _home2State extends State<home2> {
   @override
   void initState() {
     super.initState();
-    _getUserLocation();
-    _fetchUserTasks();
+    getUserLocation();
+    fetchUserData();
+    fetchUserTasks();
   }
 
-  Future<void> _getUserLocation() async {
+  Future<void> fetchUserData() async {
+    final token = await storage.read(key: 'jwt');
+
+    if (token == null) {
+      print('No token found');
+      return;
+    }
+
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:3000/auth/me'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      setState(() {
+        userStatus =
+            responseData['status'].toString(); // Convert to string if needed
+      });
+    } else {
+      print('Failed to fetch user data: ${response.body}');
+    }
+  }
+
+  Future<void> fetchUserTasks() async {
+    final token = await storage.read(key: 'jwt');
+
+    if (token == null) {
+      print('No token found');
+      return;
+    }
+
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:3000/auth/tasks?status=0'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body) as List;
+      setState(() {
+        userTasks = responseData.cast<Map<String, dynamic>>();
+      });
+
+      // Ensure that userStatus is updated before checking
+      if (userStatus != '1' && userTasks.length > 2) {
+        _showUpgradeAlert();
+      }
+    } else {
+      print('Failed to fetch tasks: ${response.body}');
+    }
+  }
+
+  Future<void> getUserLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -161,46 +221,9 @@ class _home2State extends State<home2> {
       Fluttertoast.showToast(msg: 'Task created successfully');
       _titleController.clear();
       _descriptionController.clear();
-      _fetchUserTasks(); // Fetch the updated list of tasks
+      fetchUserTasks(); // Fetch the updated list of tasks
     } else {
       Fluttertoast.showToast(msg: 'Failed to create task: ${response.body}');
-    }
-  }
-
-  Future<void> _fetchUserTasks() async {
-    final token = await storage.read(key: 'jwt');
-
-    if (token == null) {
-      Fluttertoast.showToast(msg: 'No token found');
-      return;
-    }
-
-    final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/tasks?status=0'),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final List<dynamic> responseData = jsonDecode(response.body);
-      setState(() {
-        userTasks = responseData.map((task) {
-          return {
-            'id': task['id'],
-            'plusCode': task['plusCode'],
-            'title': task['title'],
-            'description': task['description'],
-          };
-        }).toList();
-      });
-
-      if (userTasks.length > 19) {
-        _showUpgradeAlert();
-      }
-    } else {
-      Fluttertoast.showToast(msg: 'Failed to fetch tasks: ${response.body}');
     }
   }
 
