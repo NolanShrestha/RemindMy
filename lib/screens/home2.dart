@@ -349,6 +349,56 @@ class _home2State extends State<home2> {
     });
   }
 
+  void _showUpgradedAlert() {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // Prevents dismissal by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Row(
+            children: [
+              Icon(
+                Icons.payments_outlined,
+                size: 40,
+                color: Color(0xFF5F33E2),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Premium Unlocked',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          content: const Text('You have already purchased RemindMy premium.'),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => home2()),
+              ),
+            ),
+          ],
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 24.0,
+        );
+      },
+    ).then((value) {
+      // Prevent dismissal using back button
+      if (value == null) {
+        _showUpgradeAlert();
+      }
+    });
+  }
+
   void _showNotificationsDialog() {
     showDialog(
       context: context,
@@ -625,7 +675,11 @@ class _home2State extends State<home2> {
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: GestureDetector(
                           onTap: () {
-                            showAlert(context);
+                            if (userStatus != '1') {
+                              showAlert(context);
+                            } else {
+                              _showUpgradedAlert();
+                            }
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
