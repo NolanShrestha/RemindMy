@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'admin.dart';
+import 'package:remindmy/address.dart';
 
 class admin1 extends StatefulWidget {
   @override
@@ -18,8 +19,7 @@ class _admin1State extends State<admin1> {
   }
 
   Future<void> fetchUsers() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/users'));
+    final response = await http.get(Uri.parse('http://$ip:3000/auth/users'));
 
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
@@ -42,7 +42,7 @@ class _admin1State extends State<admin1> {
 
   Future<void> deleteUser(int id) async {
     final response =
-        await http.delete(Uri.parse('http://10.0.2.2:3000/auth/users/$id'));
+        await http.delete(Uri.parse('http://$ip:3000/auth/users/$id'));
 
     if (response.statusCode == 200) {
       setState(() {

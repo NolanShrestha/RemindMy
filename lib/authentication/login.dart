@@ -7,6 +7,7 @@ import '../screens/home1.dart';
 import 'register.dart';
 import '../admin/admin.dart'; // Import the AdminPage
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +48,7 @@ class _Page1State extends State<Login> {
 
   Future<void> login() async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:3000/auth/login'),
+      Uri.parse('http://$ip:3000/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

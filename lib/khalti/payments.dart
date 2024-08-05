@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../screens/home1.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -450,7 +451,7 @@ class PaymentService {
     }
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:3000/auth/payments'),
+      Uri.parse('http://$ip:3000/auth/payments'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

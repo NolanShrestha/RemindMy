@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'home1.dart';
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +69,7 @@ class _home32State extends State<home32> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/tasks?status=1'),
+      Uri.parse('http://$ip:3000/auth/tasks?status=1'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -94,7 +95,7 @@ class _home32State extends State<home32> {
     }
 
     final response = await http.patch(
-      Uri.parse('http://10.0.2.2:3000/auth/tasks/status'),
+      Uri.parse('http://$ip:3000/auth/tasks/status'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -122,7 +123,7 @@ class _home32State extends State<home32> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/notifications'),
+      Uri.parse('http://$ip:3000/auth/notifications'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'admin.dart';
+import 'package:remindmy/address.dart';
 
 class admin2 extends StatefulWidget {
   @override
@@ -18,8 +19,7 @@ class _admin2State extends State<admin2> {
   }
 
   Future<void> fetchReviews() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/reviews'));
+    final response = await http.get(Uri.parse('http://$ip:3000/auth/reviews'));
 
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);

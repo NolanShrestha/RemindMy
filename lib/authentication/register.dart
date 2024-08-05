@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'login.dart';
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +61,7 @@ class _RegisterState extends State<Register> {
       }
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/auth/register'),
+        Uri.parse('http://$ip:3000/auth/register'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

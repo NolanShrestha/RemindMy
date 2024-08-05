@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +63,7 @@ class _passwordState extends State<password> {
     }
 
     final response = await http.patch(
-      Uri.parse('http://10.0.2.2:3000/auth/password'),
+      Uri.parse('http://$ip:3000/auth/password'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

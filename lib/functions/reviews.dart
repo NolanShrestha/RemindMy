@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +53,7 @@ class _reviewsState extends State<reviews> {
     }
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:3000/auth/reviews'),
+      Uri.parse('http://$ip:3000/auth/reviews'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

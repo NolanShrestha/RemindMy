@@ -8,6 +8,7 @@ import '../functions/reviews.dart';
 import '../authentication/login.dart';
 import '../functions/password.dart';
 import 'package:khalti/khalti.dart';
+import 'package:remindmy/address.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +64,7 @@ class _home4State extends State<home4> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/me'),
+      Uri.parse('http://$ip:3000/auth/me'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -82,7 +83,7 @@ class _home4State extends State<home4> {
     }
 
     final pointsTasksResponse = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/points'),
+      Uri.parse('http://$ip:3000/auth/points'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

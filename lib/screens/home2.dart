@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'home1.dart';
+import 'package:remindmy/address.dart';
 import '../khalti/payments.dart';
 import 'package:khalti/khalti.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -94,7 +95,7 @@ class _home2State extends State<home2> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/me'),
+      Uri.parse('http://$ip:3000/auth/me'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -121,7 +122,7 @@ class _home2State extends State<home2> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/tasks?status=0'),
+      Uri.parse('http://$ip:3000/auth/tasks?status=0'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -205,7 +206,7 @@ class _home2State extends State<home2> {
     }
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:3000/auth/tasks'),
+      Uri.parse('http://$ip:3000/auth/tasks'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -236,7 +237,7 @@ class _home2State extends State<home2> {
     }
 
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/notifications'),
+      Uri.parse('http://$ip:3000/auth/notifications'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -280,7 +281,7 @@ class _home2State extends State<home2> {
     }
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:3000/auth/notifications'),
+      Uri.parse('http://$ip:3000/auth/notifications'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -301,7 +302,7 @@ class _home2State extends State<home2> {
   void _showUpgradeAlert() {
     showDialog(
       context: context,
-      barrierDismissible: false, // Prevents dismissal by tapping outside
+      barrierDismissible: true, // Prevents dismissal by tapping outside
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Row(
@@ -352,7 +353,7 @@ class _home2State extends State<home2> {
   void _showUpgradedAlert() {
     showDialog(
       context: context,
-      barrierDismissible: true, // Prevents dismissal by tapping outside
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Row(

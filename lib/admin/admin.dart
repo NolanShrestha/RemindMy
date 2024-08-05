@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../authentication/login.dart';
 import 'admin1.dart';
 import 'admin2.dart';
+import 'package:remindmy/address.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +53,7 @@ class _AdminState extends State<Admin> {
 
   Future<void> fetchTotalUsers() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/users/total'));
+        await http.get(Uri.parse('http://$ip:3000/auth/users/total'));
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -69,7 +70,7 @@ class _AdminState extends State<Admin> {
 
   Future<void> fetchTotalTasks() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/tasks/total'));
+        await http.get(Uri.parse('http://$ip:3000/auth/tasks/total'));
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -86,7 +87,7 @@ class _AdminState extends State<Admin> {
 
   Future<void> fetchTotalDoneTasks() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/tasks/done'));
+        await http.get(Uri.parse('http://$ip:3000/auth/tasks/done'));
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -103,8 +104,8 @@ class _AdminState extends State<Admin> {
   }
 
   Future<void> fetchTaskCompletionPercentage() async {
-    final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/auth/tasks/completion-percentage'));
+    final response = await http
+        .get(Uri.parse('http://$ip:3000/auth/tasks/completion-percentage'));
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -122,7 +123,7 @@ class _AdminState extends State<Admin> {
 
   Future<void> fetchTotalRevenue() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/revenue/total'));
+        await http.get(Uri.parse('http://$ip:3000/auth/revenue/total'));
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -140,7 +141,7 @@ class _AdminState extends State<Admin> {
   Future<void> fetchUserData() async {
     final token = await storage.read(key: 'jwt');
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:3000/auth/me'),
+      Uri.parse('http://$ip:3000/auth/me'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -424,7 +425,7 @@ class _AdminState extends State<Admin> {
                               'Revenue Generated:',
                               style: TextStyle(
                                 color: Color(0xFFEDE8FF),
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -433,7 +434,7 @@ class _AdminState extends State<Admin> {
                               '$totalRevenue',
                               style: const TextStyle(
                                 color: Color(0xFFEDE8FF),
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
