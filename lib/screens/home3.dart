@@ -114,7 +114,7 @@ class _home3State extends State<home3> {
       });
 
       // Check if userStatus is not "1" and if tasks length is greater than 2
-      if (userStatus != "1" && tasks.length > 2) {
+      if (userStatus == '0' && tasks.length > 1) {
         _showAlertDialog();
       }
     } else {
@@ -253,7 +253,7 @@ class _home3State extends State<home3> {
                       title: Text(notification['title'] ?? 'No title'),
                       subtitle: Text(notification['createdAt'] ?? 'No date'),
                     ),
-                    const Divider(
+                    Divider(
                       color: Colors.grey, // Customize the color
                       thickness: 1, // Customize the thickness
                       indent: 16, // Left spacing

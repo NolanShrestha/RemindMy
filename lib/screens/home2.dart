@@ -34,7 +34,16 @@ Future<void> main() async {
       ),
     ],
   );
+  requestNotificationPermissions();
   runApp(const MyApp());
+}
+
+void requestNotificationPermissions() async {
+  bool? isAllowed = await AwesomeNotifications().isNotificationAllowed();
+  if (isAllowed == false || !isAllowed) {
+    // Request permission to send notifications
+    await AwesomeNotifications().requestPermissionToSendNotifications();
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -104,9 +113,8 @@ class _home2State extends State<home2> {
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
       setState(() {
-        userStatus =
-            responseData['status'].toString(); // Convert to string if needed
-        print(userStatus);
+        userStatus = responseData['status'].toString();
+        print("User status is: $userStatus");
       });
     } else {
       print('Failed to fetch user data: ${response.body}');
@@ -136,7 +144,7 @@ class _home2State extends State<home2> {
       });
 
       // Ensure that userStatus is updated before checking
-      if (userStatus != '1' && userTasks.length > 2) {
+      if (userStatus == '0' && userTasks.length > 1) {
         _showUpgradeAlert();
       }
     } else {
@@ -419,7 +427,7 @@ class _home2State extends State<home2> {
                       title: Text(notification['title'] ?? 'No title'),
                       subtitle: Text(notification['createdAt'] ?? 'No date'),
                     ),
-                    const Divider(
+                    Divider(
                       color: Colors.grey, // Customize the color
                       thickness: 1, // Customize the thickness
                       indent: 16, // Left spacing
