@@ -1,3 +1,1 @@
-import 'package:flutter/material.dart';
-
-const String ip = '192.168.1.65';
+const String ip = '127.0.0.1';

@@ -293,7 +293,7 @@ class _AdminState extends State<Admin> {
                                     '$totalUsers',
                                     style: const TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 22,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -302,7 +302,7 @@ class _AdminState extends State<Admin> {
                                     'Users',
                                     style: TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -336,7 +336,7 @@ class _AdminState extends State<Admin> {
                                     '$totalTasks',
                                     style: const TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 22,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -345,7 +345,7 @@ class _AdminState extends State<Admin> {
                                     'Tasks',
                                     style: TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -379,7 +379,7 @@ class _AdminState extends State<Admin> {
                                     '$totalDoneTasks',
                                     style: const TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 22,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -388,7 +388,7 @@ class _AdminState extends State<Admin> {
                                     'Done',
                                     style: TextStyle(
                                       color: Color(0xFFEDE8FF),
-                                      fontSize: 16,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -425,7 +425,7 @@ class _AdminState extends State<Admin> {
                               'Revenue Generated:',
                               style: TextStyle(
                                 color: Color(0xFFEDE8FF),
-                                fontSize: 18,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -434,7 +434,7 @@ class _AdminState extends State<Admin> {
                               '$totalRevenue',
                               style: const TextStyle(
                                 color: Color(0xFFEDE8FF),
-                                fontSize: 20,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -474,7 +474,7 @@ class _AdminState extends State<Admin> {
                           'User Task Completion %:',
                           style: TextStyle(
                             color: Color(0xFFEDE8FF),
-                            fontSize: 20,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -488,7 +488,7 @@ class _AdminState extends State<Admin> {
                             "${(taskCompletionPercentage * 100).toStringAsFixed(1)}%",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
+                              fontSize: 12.0,
                               color: Color(0xFFEDE8FF),
                             ),
                           ),

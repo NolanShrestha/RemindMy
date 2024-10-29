@@ -62,7 +62,7 @@ class _Page1State extends State<Page2> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(360, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(300, 20, 10, 0),
               child: GestureDetector(
                 onTap: () {
                   setState(() {
