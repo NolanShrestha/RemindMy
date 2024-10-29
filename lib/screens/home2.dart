@@ -12,7 +12,6 @@ import 'home1.dart';
 import 'package:remindmy/address.dart';
 import '../khalti/payments.dart';
 import 'package:khalti/khalti.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -107,6 +106,7 @@ class _home2State extends State<home2> {
       setState(() {
         userStatus =
             responseData['status'].toString(); // Convert to string if needed
+        print(userStatus);
       });
     } else {
       print('Failed to fetch user data: ${response.body}');
@@ -419,7 +419,7 @@ class _home2State extends State<home2> {
                       title: Text(notification['title'] ?? 'No title'),
                       subtitle: Text(notification['createdAt'] ?? 'No date'),
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.grey, // Customize the color
                       thickness: 1, // Customize the thickness
                       indent: 16, // Left spacing

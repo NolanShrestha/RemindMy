@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GMSApiKey</key>
+	<string>AIzaSyCPuV4fknlBN8pfoitLPkHsN8ko0FfzLmA</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires access to your location while in use.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+    <string>fetch</string>
+    <string>remote-notification</string>
+	</array>
+	<key>NSUserNotificationAlertStyle</key>
+	<string>alert</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We use your data to show you notifications.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show relevant notifications.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

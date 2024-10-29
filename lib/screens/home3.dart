@@ -7,7 +7,6 @@ import 'home1.dart';
 import 'home32.dart';
 import '../khalti/payments.dart';
 import 'package:khalti/khalti.dart';
-import 'home32.dart';
 import 'package:remindmy/address.dart';
 
 Future<void> main() async {
@@ -254,7 +253,7 @@ class _home3State extends State<home3> {
                       title: Text(notification['title'] ?? 'No title'),
                       subtitle: Text(notification['createdAt'] ?? 'No date'),
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.grey, // Customize the color
                       thickness: 1, // Customize the thickness
                       indent: 16, // Left spacing

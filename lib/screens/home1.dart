@@ -150,7 +150,7 @@ class _home1State extends State<home1> {
 
   Route _createRoute1() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => const home2(),
+      pageBuilder: (context, animation, secondaryAnimation) => const home1(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
@@ -448,10 +448,8 @@ class _home1State extends State<home1> {
                 ),
                 onPressed: () {
                   setState(() {
-                    setState(() {
-                      Navigator.of(context).push(_createRoute3())
-                          as Route<Object?>;
-                    });
+                    Navigator.of(context).push(_createRoute3())
+                        as Route<Object?>;
                   });
                 },
               ),
